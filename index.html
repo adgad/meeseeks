@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="main.css">
 </head>
 <body>
-<div class="meeseeks">
+<div class="meeseeks meeseeks--arm-raise meeseeks--wobble" data-face="happy">
 	<div class="meeseeks__hair">
 		<span class="meeseeks__hair__strand"></span>
 		<span class="meeseeks__hair__strand"></span>
@@ -17,19 +17,60 @@
 	<div class="meeseeks__face">
 		<span class="meeseeks__face__eye meeseeks__face__eye--left"></span>
 		<span class="meeseeks__face__eye meeseeks__face__eye--right"></span>
+		<div class="meeseeks__face__mouth-open">
 
+			<div class="meeseeks__tooth--top meeseeks__tooth"></div>
+			<div class="meeseeks__tooth--top meeseeks__tooth"></div>
+			<div class="meeseeks__tooth--top meeseeks__tooth"></div>
+			<div class="meeseeks__tooth--top meeseeks__tooth"></div>
+			<div class="meeseeks__tooth--bottom meeseeks__tooth"></div>
+			<div class="meeseeks__tooth--bottom meeseeks__tooth"></div>
+			<div class="meeseeks__tooth--bottom meeseeks__tooth"></div>
+			<div class="meeseeks__tooth--bottom meeseeks__tooth"></div>
+		</div>
 		<div class="meeseeks__face__smile"></div>
 		<div class="meeseeks__face__chin"></div>
+		<div class="meeseeks__face__ooh"></div>
 	</div>
     
     <div class="meeseeks__torso"></div>
-    <div class="meeseeks__limb meeseeks__arm meeseeks__arm--left"></div>
-    <div class="meeseeks__limb meeseeks__arm meeseeks__arm--right"></div>
-    <div class="meeseeks__limb meeseeks__forearm meeseeks__forearm--left"></div>
-    <div class="meeseeks__limb meeseeks__forearm meeseeks__forearm--right"></div>
+    <div class="meeseeks__full-arm meeseeks__full-arm--left">
+	    <div class="meeseeks__limb meeseeks__arm meeseeks__arm--left"></div>
+	    <div class="meeseeks__limb meeseeks__forearm meeseeks__forearm--left"></div>
+    </div>
+
+    <div class="meeseeks__full-arm meeseeks__full-arm--right">
+	    <div class="meeseeks__limb meeseeks__arm meeseeks__arm--right"></div>
+	    <div class="meeseeks__limb meeseeks__forearm meeseeks__forearm--right"></div>
+    </div>
     <div class="meeseeks__limb meeseeks__leg meeseeks__leg--left"></div>
     <div class="meeseeks__limb meeseeks__leg meeseeks__leg--right"></div>
 
-    
+	<audio autoplay style="display: none;">
+		<source src="lookatme.wav">
+	</audio>
+	<audio id="can-do" style="display: none;">
+		<source src="cando.wav">
+	</audio>
+    <script>
+    	var meeseeks = document.querySelector('.meeseeks');
+  		var ooh = document.getElementById('can-do');
+  		ooh.addEventListener('play', () => {
+				meeseeks.setAttribute('data-face', 'ooh');
+  		});
+  		ooh.addEventListener('ended', () => {
+				meeseeks.setAttribute('data-face', 'normal');
+  		});
+    	meeseeks.addEventListener('animationend', function(ev) { 
+    		if(ev.animationName === 'wobble') {
+    			meeseeks.setAttribute('data-face', 'normal');
+    		}
+    	}, false);
+
+    	meeseeks.addEventListener('click', function(ev) {
+    		ooh.play();
+    	});
+
+    </script>
 </div></body>
 </html>
